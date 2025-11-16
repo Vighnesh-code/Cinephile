@@ -1,7 +1,14 @@
+import HeroSection from "./components/HeroSection";
+import Navbar from "./components/Navbar";
+import Slider from "./components/Slider";
+
 function App() {
   return (
     <div className="min-h-screen">
-      <h1 className="text-3xl italic font-bold">Cinephile</h1>
+      <Navbar />
+      <HeroSection />
+      {/* Demo Component */}
+      <Slider />
     </div>
   );
 }
