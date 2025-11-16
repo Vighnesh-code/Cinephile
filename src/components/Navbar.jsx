@@ -30,17 +30,17 @@ const Navbar = () => {
   ];
 
   return (
-    <div className="sticky top-0 z-20 p-3 text-white flex justify-center items-center h-17 gap-4">
+    <div className="sticky top-0 z-50 p-3 text-white flex justify-center items-center h-17 gap-4">
       <h1 className="text-2xl uppercase text-white font-medium">
         <span className="text-[#00A6FF]">Cine</span>
         phile
       </h1>
 
       {/* Search Input Field */}
-      <div className="flex-1 h-full rounded-full border border-slate-600 flex justify-center items-center px-3">
+      <div className="flex-1 h-full rounded-full border border-slate-600 flex justify-center items-center px-3 focus-within:border-slate-400 focus-within:ring-2 focus-within:ring-slate-400">
         <Search />
         <Input
-          className="border-none"
+          className="border-none focus:outline-none focus-visible:ring-0 text-white placeholder:text-slate-200"
           placeholder="Search for your movies here"
         />
       </div>

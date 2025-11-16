@@ -8,7 +8,7 @@ const MovieIntroSlider = () => {
   const moviePosters = [MoviePoster1, MoviePoster2, MoviePoster3, MoviePoster4];
 
   return (
-    <div className="absolute text-red-500 bottom-3 right-10 z-50">
+    <div className="absolute text-red-500 bottom-3 right-7 z-50">
       <div className="flex gap-3">
         {moviePosters.map((poster, index) => (
           <div

@@ -1,6 +1,6 @@
 import React from "react";
 import MovieIntroSlider from "./MovieIntroSlider";
-import heroImage from "/assets/Wakanda Forever Image.jpg";
+import heroImage from "/assets/Avatar movie scene.jpg";
 import { Play } from "lucide-react";
 
 const HeroSection = () => {
