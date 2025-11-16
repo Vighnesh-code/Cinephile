@@ -1,12 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { MovieStore } from "../../store/MovieStore";
-import {
-  Carousel,
-  CarouselContent,
-  CarouselItem,
-  CarouselNext,
-  CarouselPrevious,
-} from "./ui/carousel";
+import { Carousel, CarouselContent, CarouselItem } from "./ui/carousel";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 
 const Top10Section = () => {
@@ -16,10 +10,6 @@ const Top10Section = () => {
   useEffect(() => {
     getMovies();
   }, [getMovies]);
-
-  useEffect(() => {
-    console.log("Movie Names: ", movies);
-  }, [movies]);
 
   return (
     <div className="text-white px-5">

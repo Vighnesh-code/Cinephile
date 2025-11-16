@@ -1,13 +1,16 @@
-import React from "react";
+import React, { useEffect } from "react";
 import MovieIntroSlider from "./MovieIntroSlider";
 import heroImage from "/assets/Avatar movie scene.jpg";
 import { Play } from "lucide-react";
+import { MovieStore } from "../../store/MovieStore";
 
 const HeroSection = () => {
+  const { activeHeroMovie, popularMovies } = MovieStore();
+
   return (
     <div className="h-screen w-full">
       <img
-        src={heroImage}
+        src={`https://image.tmdb.org/t/p/original/${popularMovies[activeHeroMovie]?.backdrop_path}`}
         alt={"Hero Image"}
         className="absolute inset-0 size-full object-cover"
       />
@@ -17,21 +20,25 @@ const HeroSection = () => {
 
       {/* Content Overlay */}
       <div className="absolute z-30 h-full flex flex-col justify-end bottom-0 px-5 gap-5">
-        <h1 className="text-5xl font-bold text-white">Movie Title</h1>
+        <h1 className="text-5xl font-bold text-white">
+          {popularMovies[activeHeroMovie]?.original_title}
+        </h1>
 
         {/* Rating, RunTime & Genre Section */}
         <div className="flex gap-3 text-white">
-          <div className="bg-slate-500 p-2 rounded-2xl">Rating</div>
-          <div className="bg-slate-500 p-2 rounded-2xl">RunTime</div>
-          <div className="bg-slate-500 p-2 rounded-2xl">Genre</div>
+          <div className="bg-black/40 p-2 rounded-2xl">
+            ⭐ {popularMovies[activeHeroMovie]?.vote_average}
+          </div>
+          <div className="bg-black/40 p-2 rounded-2xl">
+            {popularMovies[activeHeroMovie]?.release_date}
+          </div>
+          <div className="bg-black/40 p-2 rounded-2xl">
+            {popularMovies[activeHeroMovie]?.original_language}
+          </div>
         </div>
 
         <p className="text-white max-w-2xl">
-          Movie Description comes here. This section contains the description of
-          the movie Movie Description comes here. This section contains the
-          description of the movie Movie Description comes here. This section
-          contains the description of the movie Movie Description comes here.
-          This section contains the description of the movie
+          {popularMovies[activeHeroMovie]?.overview}
         </p>
 
         <div className="flex text-white gap-5">
