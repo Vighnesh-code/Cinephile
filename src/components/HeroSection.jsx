@@ -1,6 +1,5 @@
 import React, { useEffect } from "react";
 import MovieIntroSlider from "./MovieIntroSlider";
-import heroImage from "/assets/Avatar movie scene.jpg";
 import { Play } from "lucide-react";
 import { MovieStore } from "../../store/MovieStore";
 

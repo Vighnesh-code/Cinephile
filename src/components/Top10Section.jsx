@@ -44,7 +44,7 @@ const Top10Section = () => {
       </div>
 
       {/* Slider Section  */}
-      <div className="min-h-auto overflow-hidden mt-12">
+      <div className="h-96 overflow-hidden mt-12">
         <Carousel setApi={setApi}>
           <CarouselContent>
             {movies.slice(0, 10).map((movie, index) => (
