@@ -4,14 +4,16 @@ import CategoriesSection from "./components/CategoriesSection";
 import HeroSection from "./components/HeroSection";
 import Navbar from "./components/Navbar";
 import Top10Section from "./components/Top10Section";
-import { CalendarDays, Radio } from "lucide-react";
+import { CalendarDays, ChartNoAxesColumnIncreasing, Radio } from "lucide-react";
 
 function App() {
   const {
     nowPlayingMovies,
     upcomingMovies,
+    topRatedMovies,
     getNowPlayingMovies,
     getUpcomingMovies,
+    getTopRatedMovies,
   } = MovieStore();
 
   return (
@@ -32,10 +34,10 @@ function App() {
         icon={<CalendarDays className="size-10 text-white" />}
       />
       <CategoriesSection
-        categoryData={upcomingMovies}
-        categoryApiCall={getUpcomingMovies}
-        title="Upcoming"
-        icon={<CalendarDays className="size-10 text-white" />}
+        categoryData={topRatedMovies}
+        categoryApiCall={getTopRatedMovies}
+        title="Top Rated"
+        icon={<ChartNoAxesColumnIncreasing className="size-10 text-white" />}
       />
     </div>
   );
