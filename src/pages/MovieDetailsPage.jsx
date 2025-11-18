@@ -6,15 +6,18 @@ import { Languages } from "lucide-react";
 
 const MovieDetailsPage = () => {
   const { movieId } = useParams();
-  const { getMovieById, movieDetails } = MovieStore();
+  const { getMovieById, movieDetails, trailers, getTrailers } = MovieStore();
 
   useEffect(() => {
     getMovieById(movieId);
+    getTrailers(movieId);
   }, []);
 
-  useEffect(() => {
-    console.log("Movie Details: ", movieDetails);
-  }, [movieDetails]);
+  const filterTrailers = trailers?.filter(
+    (trailer) => trailer?.type === "Trailer"
+  );
+
+  console.log("Trailers: ", filterTrailers);
 
   return (
     <div className="min-h-screen relative">
@@ -104,8 +107,13 @@ const MovieDetailsPage = () => {
           <div className="h-180 mt-8 flex flex-col">
             <h1 className="text-5xl uppercase font-unbounded">Trailer</h1>
             <div className="h-full bg-black/40 mt-5">
-              {movieDetails?.video ? (
-                <video src={movieDetails?.video} className="size-full" />
+              {filterTrailers ? (
+                <iframe
+                  src={`https://www.youtube.com/embed/${filterTrailers[0]?.key}`}
+                  className="size-full"
+                  title={filterTrailers?.key}
+                  allowFullScreen
+                />
               ) : (
                 <div className="flex flex-col gap-3 justify-center items-center h-full">
                   <p className="text-3xl font-oswald">No Video for</p>
