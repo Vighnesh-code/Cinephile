@@ -30,7 +30,7 @@ const Navbar = () => {
   ];
 
   return (
-    <div className="sticky top-0 z-50 p-3 text-white flex justify-center items-center h-17 gap-4">
+    <div className="sticky top-0 z-1000 p-3 text-white flex justify-center items-center h-17 gap-4">
       <h1 className="text-2xl uppercase text-white font-medium">
         <span className="text-[#00A6FF]">Cine</span>
         phile

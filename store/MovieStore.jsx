@@ -7,13 +7,11 @@ export const MovieStore = create((set) => ({
   nowPlayingMovies: [],
   upcomingMovies: [],
   topRatedMovies: [],
+  movieDetails: {},
   activeHeroMovie: 0,
+  setActiveHeroMovie: (movie) => set({ activeHeroMovie: movie }),
   loading: false,
   error: null,
-  // setMovies: (movieData) => set({ movies: movieData }),
-  // setPopularMovies: (movie) => set({ popularMovies: movie }),
-  // setNowPlayingMovies: (movie) => set({ nowPlayingMovies: movie }),
-  // setActiveHeroMovie: (movie) => set({ activeHeroMovie: movie }),
   getMovies: async () => {
     set({ loading: true, error: null });
     try {
@@ -154,6 +152,35 @@ export const MovieStore = create((set) => ({
     } catch (error) {
       console.log("Failed to fetch Upcoming Movies: ", error.message);
       throw new Error(error);
+    }
+  },
+  getMovieById: async (movieId) => {
+    try {
+      set({ loading: true, error: null });
+      // console.log(`Movie URL: https://api.themoviedb.org/3/movie/${movieId}`);
+      const response = await fetch(
+        `https://api.themoviedb.org/3/movie/${movieId}`,
+        {
+          method: "GET",
+          headers: {
+            accept: "application/json",
+            Authorization: `Bearer ${
+              import.meta.env.VITE_API_KEY_TMDB_ACCESS_TOKEN
+            }`,
+          },
+        }
+      );
+
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
+
+      const data = await response.json();
+      set({ movieDetails: data || {}, loading: false });
+      return data || {};
+    } catch (error) {
+      console.log("Failed to get movie by their specific ID: ", error.message);
+      throw error;
     }
   },
 }));
