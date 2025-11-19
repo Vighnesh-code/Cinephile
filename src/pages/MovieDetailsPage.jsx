@@ -6,7 +6,7 @@ import { CaseLower, Languages } from "lucide-react";
 import { Spinner } from "../components/ui/spinner";
 
 const MovieDetailsPage = () => {
-  const [expandedContent, setExpandedContent] = useState(false);
+  const [expandedReviews, setExpandedReviews] = useState({});
   const { movieId } = useParams();
   const {
     getMovieById,
@@ -28,7 +28,12 @@ const MovieDetailsPage = () => {
     (trailer) => trailer?.type === "Trailer"
   );
 
-  console.log("Trailers: ", filterTrailers);
+  const handleDetailReviewToggle = (reviewId) => {
+    setExpandedReviews((prev) => ({
+      ...prev,
+      [reviewId]: !prev[reviewId],
+    }));
+  };
 
   return (
     <>
@@ -172,7 +177,7 @@ const MovieDetailsPage = () => {
                       <div className="mt-2 p-2">
                         <p className="font-stack">
                           {review?.content ? (
-                            expandedContent ? (
+                            expandedReviews[review?.id] ? (
                               review?.content
                             ) : (
                               review?.content?.slice(0, 200)
@@ -181,16 +186,16 @@ const MovieDetailsPage = () => {
                             <p>No Reviews for {movieDetails?.title}</p>
                           )}
                         </p>
-                        <span
-                          className="hover:text-blue-300 duration-300"
-                          onClick={() => setExpandedContent((prev) => !prev)}
-                        >
-                          {review?.content
-                            ? expandedContent
+                        {review?.content && review?.content.length > 200 && (
+                          <button
+                            className="hover:text-blue-300 hover:cursor-pointer mt-3 text-blue-300 duration-300 font-stack"
+                            onClick={() => handleDetailReviewToggle(review?.id)}
+                          >
+                            {expandedReviews[review?.id]
                               ? "Read Less..."
-                              : "Read More..."
-                            : ""}
-                        </span>
+                              : "Read More..."}
+                          </button>
+                        )}
                       </div>
                     </div>
                   ))}
