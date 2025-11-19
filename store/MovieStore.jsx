@@ -8,6 +8,7 @@ export const MovieStore = create((set) => ({
   upcomingMovies: [],
   topRatedMovies: [],
   trailers: [],
+  reviews: [],
   movieDetails: {},
   activeHeroMovie: 0,
   setActiveHeroMovie: (movie) => set({ activeHeroMovie: movie }),
@@ -208,6 +209,33 @@ export const MovieStore = create((set) => ({
       return data.results || data;
     } catch (error) {
       console.log("Failed to fetch trailer: ", error.message);
+      throw error;
+    }
+  },
+  getReviews: async (movieId) => {
+    try {
+      set({ loading: true, error: null });
+      const response = await fetch(
+        `https://api.themoviedb.org/3/movie/${movieId}/reviews`,
+        {
+          method: "GET",
+          headers: {
+            accept: "application/json",
+            Authorization: `Bearer ${
+              import.meta.env.VITE_API_KEY_TMDB_ACCESS_TOKEN
+            }`,
+          },
+        }
+      );
+
+      if (!response.ok)
+        throw new Error(`HTTP Error! status: ${response.status}`);
+
+      const data = await response.json();
+      set({ reviews: data.results, loading: false });
+      return data.results || data;
+    } catch (error) {
+      console.log("Failed to fetch Reviews", error.message);
       throw error;
     }
   },

@@ -5,12 +5,21 @@ import Navbar from "../components/Navbar";
 import { Languages } from "lucide-react";
 
 const MovieDetailsPage = () => {
+  const [expandedContent, setExpandedContent] = useState(false);
   const { movieId } = useParams();
-  const { getMovieById, movieDetails, trailers, getTrailers } = MovieStore();
+  const {
+    getMovieById,
+    movieDetails,
+    reviews,
+    trailers,
+    getTrailers,
+    getReviews,
+  } = MovieStore();
 
   useEffect(() => {
     getMovieById(movieId);
     getTrailers(movieId);
+    getReviews(movieId);
   }, []);
 
   const filterTrailers = trailers?.filter(
@@ -104,6 +113,7 @@ const MovieDetailsPage = () => {
             ))}
           </div>
 
+          {/* Trailer Section */}
           <div className="h-180 mt-8 flex flex-col">
             <h1 className="text-5xl uppercase font-unbounded">Trailer</h1>
             <div className="h-full bg-black/40 mt-5">
@@ -120,6 +130,47 @@ const MovieDetailsPage = () => {
                   <p className="text-4xl font-oswald">{movieDetails?.title}</p>
                 </div>
               )}
+            </div>
+          </div>
+
+          {/* Review Sections */}
+          <div className="h-full mt-15">
+            <h1 className="text-5xl uppercase font-unbounded">Reviews</h1>
+            <div className="flex flex-col gap-2 h-auto mt-4">
+              {reviews?.map((review, index) => (
+                <div className="w-full p-4 rounded-2xl bg-black/40" key={index}>
+                  <div className="flex gap-3 items-center justify-between">
+                    <div className="rounded-full size-13">
+                      <img
+                        src={`https://image.tmdb.org/t/p/original/${review?.author_details?.avatar_path}`}
+                        alt={`${review?.author}`}
+                        className="size-full object-contain rounded-full"
+                      />
+                    </div>
+                    <p className="text-xl flex-1 font-stack">
+                      {review?.author_details?.name}
+                    </p>
+                    <p className="text-xl font-unbounded">
+                      {review?.author_details?.rating}⭐
+                    </p>
+                  </div>
+
+                  <div className="mt-2 p-2">
+                    <p className="font-stack">
+                      {expandedContent
+                        ? review?.content
+                        : review?.content?.slice(0, 200)}
+                      ...
+                    </p>
+                    <span
+                      className="hover:text-blue-300 duration-300"
+                      onClick={() => setExpandedContent((prev) => !prev)}
+                    >
+                      {expandedContent ? "Read Less..." : "Read More..."}
+                    </span>
+                  </div>
+                </div>
+              ))}
             </div>
           </div>
         </div>
