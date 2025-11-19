@@ -149,7 +149,7 @@ const MovieDetailsPage = () => {
                 </div>
               </div>
 
-              {/* Review Sections */}
+              {/* Review Section */}
               <div className="h-auto mt-15">
                 <h1 className="text-5xl uppercase font-unbounded">Reviews</h1>
                 <div className="flex flex-col gap-2 h-auto mt-4">

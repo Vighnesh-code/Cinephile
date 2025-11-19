@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Input } from "@/components/ui/input";
 import {
   CircleUserRound,
@@ -10,6 +10,24 @@ import {
 } from "lucide-react";
 
 const Navbar = () => {
+  const [scrolled, setScrolled] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      if (window.scrollY > 50) {
+        setScrolled(true);
+      } else {
+        setScrolled(false);
+      }
+    };
+
+    window.addEventListener("scroll", handleScroll);
+
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, []);
+
   const toggleData = [
     {
       icon: <Film />,
@@ -30,7 +48,11 @@ const Navbar = () => {
   ];
 
   return (
-    <div className="sticky top-0 z-1000 p-3 text-white flex justify-center items-center h-17 gap-4">
+    <div
+      className={`sticky top-0 z-1000 p-3 text-white flex justify-center items-center h-17 gap-4 ${
+        scrolled && "bg-black/70"
+      }`}
+    >
       <h1 className="text-2xl uppercase text-white font-medium">
         <span className="text-[#00A6FF]">Cine</span>
         phile
