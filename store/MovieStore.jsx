@@ -11,6 +11,9 @@ export const MovieStore = create((set) => ({
   reviews: [],
   movieDetails: {},
   activeHeroMovie: 0,
+  activeNavbarToggle: 0,
+  setActiveNavbarToggle: (currentItem) =>
+    set({ activeNavbarToggle: currentItem }),
   setActiveHeroMovie: (movie) => set({ activeHeroMovie: movie }),
   loading: false,
   error: null,

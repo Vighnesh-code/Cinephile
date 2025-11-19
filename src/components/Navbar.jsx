@@ -8,9 +8,11 @@ import {
   Tv,
   Volleyball,
 } from "lucide-react";
+import { MovieStore } from "../../store/MovieStore";
 
 const Navbar = () => {
   const [scrolled, setScrolled] = useState(false);
+  const { activeNavbarToggle, setActiveNavbarToggle } = MovieStore();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -30,18 +32,22 @@ const Navbar = () => {
 
   const toggleData = [
     {
+      id: 1,
       icon: <Film />,
       title: "Movies",
     },
     {
+      id: 2,
       icon: <Tv />,
       title: "TV",
     },
     {
+      id: 3,
       icon: <RadioTower />,
       title: "LiveTV",
     },
     {
+      id: 4,
       icon: <Volleyball />,
       title: "Sports",
     },
@@ -72,7 +78,10 @@ const Navbar = () => {
         {toggleData.map((data, index) => (
           <div
             key={index}
-            className="flex justify-center items-center p-2 h-10 w-auto gap-1"
+            className={`flex justify-center items-center duration-300 p-2 h-10 w-auto gap-1 ${
+              activeNavbarToggle === index && "bg-white rounded-full text-black"
+            } `}
+            onClick={() => setActiveNavbarToggle(index)}
           >
             <div className="h-full">{data.icon}</div>
             <p>{data.title}</p>

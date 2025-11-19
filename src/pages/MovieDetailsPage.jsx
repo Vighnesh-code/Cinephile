@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { MovieStore } from "../../store/MovieStore";
 import Navbar from "../components/Navbar";
-import { CaseLower, Languages } from "lucide-react";
 import { Spinner } from "../components/ui/spinner";
 
 const MovieDetailsPage = () => {
@@ -153,9 +152,9 @@ const MovieDetailsPage = () => {
               <div className="h-auto mt-15">
                 <h1 className="text-5xl uppercase font-unbounded">Reviews</h1>
                 <div className="flex flex-col gap-2 h-auto mt-4">
-                  {reviews?.map((review, index) => (
+                  {reviews?.slice(0, 5)?.map((review, index) => (
                     <div
-                      className="w-full p-4 rounded-2xl bg-black/40"
+                      className="w-full p-4 rounded-2xl bg-black/60"
                       key={index}
                     >
                       <div className="flex gap-3 items-center justify-between">
